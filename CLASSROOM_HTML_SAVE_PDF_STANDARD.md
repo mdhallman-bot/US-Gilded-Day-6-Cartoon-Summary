@@ -1,4 +1,4 @@
-# Classroom HTML — Save, Resume, PDF and Deployment Standard (v1.0)
+# Classroom HTML — Save, Resume, PDF and Deployment Standard (v1.1)
 
 **Applies to:** U.S. History, Personal Finance, and other student-facing GitHub Pages assignments. **Priority:** student work survives > visual polish. **Reference implementations:** U.S. History Unit 2 Day 3 (strong saving conventions), Day 5 (known save/export regressions), and Day 6 (confirmed endpoint mismatch). This document is a release contract, not permission to modify an existing live lesson.
 
@@ -23,10 +23,17 @@
 - A separate teacher-only recovery section may offer JSON backup/export and restore; do **not** present JSON as an ordinary student submission. Students see only **Save now**, **Download Assignment PDF**, and **Emergency PDF**.
 - No shared secret in HTML or GitHub; user has chosen no shared secret for this workflow. **Important limitation:** alias-only endpoints are not secure identity verification. Keep Sheets private, do not store sensitive information, and do not treat aliases as authorization.
 
+## Nonnegotiable language, writing, and completion supports
+
+- **Generous Tier 2 and Tier 3 vocabulary help:** Identify and define both academic words (Tier 2) and discipline-specific words (Tier 3) throughout student directions, captions, historical context, source transcriptions, and guiding questions where appropriate. When uncertain whether a term may hinder understanding, **include a hover/tap/focus definition**. Explain phrases and historical usages as well as isolated words. Definitions must be concise, readable, high contrast, and available by keyboard and touch as well as mouse; do not give away students' interpretations or answers.
+- **Two sentence frames for each written text box**, displayed right beside the response field and unlabeled by proficiency level. The first is a more accessible structural opening; the second invites more nuanced reasoning or explanation. Neither frame supplies historical conclusions, selects evidence for students, or writes their answer. Use field-specific frames, including the final synthesis response, rather than repeating an unrelated generic sentence.
+- **Completion grade on every exported PDF, at the TOP:** Print clearly `Completion grade: XX% (N of M required responses completed)` on page one, beside the student alias and lesson title. This is a completion-only metric, not a teacher-assigned quality grade. Apply the same in Emergency PDF and any other saved PDF. Use filled required response fields as the denominator, not optional tools or interface actions. Do not apply a 50-point academic grading floor to this displayed completion percentage unless the teacher explicitly requests that rule.
+- Every new build's accessibility and PDF checklist explicitly verifies the tooltip coverage, keyboard/tap use, both frames for every written response, and completion grade in **every** PDF pathway.
+
 ## PDF contract
 
 - **Download Assignment PDF** produces a readable, data-driven PDF from the response state, not a screenshot of clipped textareas and not a serialized “Save Answered HTML” page.
-- Include lesson, student alias, completion percentage (filled required fields, **not score**), date as appropriate, image/source references, **every response in full**, and pagination/line-wrapping for very long answers. Avoid giant unreadable base64/data URL dumps.
+- Include lesson, student alias, completion grade/percentage (filled required fields, **not score**), date as appropriate, image/source references, **every response in full**, and pagination/line-wrapping for very long answers. Avoid giant unreadable base64/data URL dumps.
 - **Emergency PDF** is a genuinely separate print/save-as-PDF fallback. Do not remove or replace it when changing the primary PDF.
 - Never assume the PDF works because the download button works; **open and inspect the produced PDF** with short and 1,000+ character answers, all field types, and a multi-page response.
 
@@ -37,7 +44,7 @@
 3. Reload same browser and recover every field; recover on a second browser/device using the prescribed identity method.
 4. Test offline or backend failure: local copy remains, status reports cloud failure, retry later succeeds without losing edits.
 5. Test two tabs / stale version conflict; older work must not silently overwrite newer work.
-6. Check PDF contains complete content for every field and 1,000+ character writing; check alias, completion and pages. Also check Emergency PDF.
+6. Check PDF contains complete content for every field and 1,000+ character writing; check alias, **completion grade prominently at top**, and pages. Check Emergency PDF has the same grade. Verify both unlabeled sentence frames for every text box and generous Tier 2/3 hover/tap/focus help throughout.
 7. Check all images load from the published GitHub Pages URL, including enlarge/zoom/return, and the input state does not reset.
 8. Audit browser console for broken assets and errors. Only announce “classroom-ready” for checks actually completed; report any unchecked items.
 
@@ -49,6 +56,6 @@
 
 ## Keep this cross-project
 
-Add this document to **both** the U.S. History and Personal Finance project's files/instructions. In each new build request say: “Follow Classroom HTML Save/PDF Standard v1.0; use the frozen verified reference implementation, and perform the release gates.” If a new issue is discovered, update the standard once, then use the revised version in both projects.
+Add this document to **both** the U.S. History and Personal Finance project's files/instructions. In each new build request say: “Follow Classroom HTML Save/PDF Standard v1.1; use the frozen verified reference implementation, and perform the release gates.” If a new issue is discovered, update the standard once, then use the revised version in both projects.
 
 **No changes to a working live lesson's save layer without explicit authorization and a rollback plan.**
