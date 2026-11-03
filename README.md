@@ -4,7 +4,7 @@ November 4, 2026 · U.S. History · six-source Gilded Age review.
 
 ## Deployment package
 
-The lesson package is maintained as `index.html`, `Code.gs`, and six images in `assets/` (tweed.jpg, protectors.jpg, pullman.jpg, carnegie.png, stranger.jpg, safety.jpg). Publish these exact paths at the repository root. This repository's Pages site is not ready until those files are present.
+The lesson package is maintained as `index.html`, `Code.gs`, and six images in `assets/` (tweed.jpg, protectors.jpg, pullman.jpg, carnegie.png, stranger.jpg, safety.jpg). Publish these exact paths at the repository root. All six original images are now committed and verified against the teacher-uploaded files. GitHub Pages may require a fresh reload to show them.
 
 ## Saving
 
@@ -19,3 +19,7 @@ The lesson package is maintained as `index.html`, `Code.gs`, and six images in `
 5. Verify the student alias and completion percentage in the exported PDF.
 
 The review day's formative asks students to classify six images and individually synthesize two visual sources around power. Original source descriptions distinguish newspaper illustration from cartoon and identify the biased portrayal in the immigration cartoon.
+
+## App Script version warning
+
+If the read-only diagnostic `/exec?action=load&alias=TEST99` returns `Set SHEET_ID in Code.gs first.`, the deployed `/exec` is still using the older Apps Script version. This repository's corrected `Code.gs` reads the `SHEET_ID` Script Property, but **updating this GitHub repository does not redeploy Google Apps Script**. In Apps Script select **Deploy → Manage deployments → Edit (pencil) → Version: New version → Deploy**. Edit the *existing* deployment to retain the endpoint configured in `index.html`. If a new deployment is created instead, the URL in `index.html` must be updated to its new `/exec` link.
