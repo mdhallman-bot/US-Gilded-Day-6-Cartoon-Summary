@@ -70,7 +70,7 @@ pays:['___ pays the price by ___.','The cartoon suggests that ___ bears the cost
 function frameHelp(which){const f=DAY6_FRAMES[which];return '<div class="sentence-frames"><p class="frame-intro">Sentence starters — choose one or write your own:</p><p>'+escapeHtml(f[0])+'</p><p>'+escapeHtml(f[1])+'</p></div>';}
 function glossaryHtml(input){
  const keys=Object.keys(DAY6_GLOSSARY).sort((a,b)=>b.length-a.length);
- const pattern=new RegExp('\\b('+keys.map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\function markupContext(s){let t=escapeHtml(s.context);for(const [term,definition] of s.terms||[]){const needle=escapeHtml(term);const re=new RegExp('\\b'+needle+'\\b','i');t=t.replace(re,addTerm(term,definition))}return t}')).join('|')+')\\b','gi');
+ const pattern=new RegExp('\\b('+keys.join('|')+')\\b','gi');
  return String(input).split(pattern).map(fragment=>{const k=keys.find(key=>key.toLowerCase()===fragment.toLowerCase());return k?addTerm(fragment,DAY6_GLOSSARY[k]):escapeHtml(fragment)}).join('');
 }
 function markupContext(s){return glossaryHtml(s.context)}
