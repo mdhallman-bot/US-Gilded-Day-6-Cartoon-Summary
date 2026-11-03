@@ -1,4 +1,4 @@
-# Classroom HTML — Save, Resume, PDF and Deployment Standard (v1.1)
+# Classroom HTML — Save, Resume, PDF and Deployment Standard (v1.2)
 
 **Applies to:** U.S. History, Personal Finance, and other student-facing GitHub Pages assignments. **Priority:** student work survives > visual polish. **Reference implementations:** U.S. History Unit 2 Day 3 (strong saving conventions), Day 5 (known save/export regressions), and Day 6 (confirmed endpoint mismatch). This document is a release contract, not permission to modify an existing live lesson.
 
@@ -30,6 +30,13 @@
 - **Completion grade on every exported PDF, at the TOP:** Print clearly `Completion grade: XX% (N of M required responses completed)` on page one, beside the student alias and lesson title. This is a completion-only metric, not a teacher-assigned quality grade. Apply the same in Emergency PDF and any other saved PDF. Use filled required response fields as the denominator, not optional tools or interface actions. Do not apply a 50-point academic grading floor to this displayed completion percentage unless the teacher explicitly requests that rule.
 - Every new build's accessibility and PDF checklist explicitly verifies the tooltip coverage, keyboard/tap use, both frames for every written response, and completion grade in **every** PDF pathway.
 
+## Offline-safe PDF dependencies (mandatory)
+
+- Never rely on a third-party CDN for a **critical student action** such as Assignment PDF export. Vendor the approved, version-pinned PDF library into the lesson's GitHub repository and reference it by a local relative path, e.g. `assets/jspdf.umd.min.js`. Preserve its copyright/license notice.
+- A dependency's mere presence in HTML is not proof it loaded. Check the published page's actual PDF export with school/Chromebook network restrictions; if library loading fails, show an explicit fallback to Emergency PDF without losing student answers.
+- Verify all external fonts, images, scripts, and stylesheet dependencies needed for saving, recovery, PDFs, and accessibility are available in the published site or have tested offline-safe alternatives. Student deliverables must not fail merely because a third-party host is blocked.
+- Regression: Day 6's primary PDF failed with “PDF library unavailable” because jsPDF was linked through Cloudflare CDN. The fix vendors jsPDF 2.5.2 as `assets/jspdf.umd.min.js` in the same GitHub Pages repository.
+
 ## PDF contract
 
 - **Download Assignment PDF** produces a readable, data-driven PDF from the response state, not a screenshot of clipped textareas and not a serialized “Save Answered HTML” page.
@@ -56,6 +63,6 @@
 
 ## Keep this cross-project
 
-Add this document to **both** the U.S. History and Personal Finance project's files/instructions. In each new build request say: “Follow Classroom HTML Save/PDF Standard v1.1; use the frozen verified reference implementation, and perform the release gates.” If a new issue is discovered, update the standard once, then use the revised version in both projects.
+Add this document to **both** the U.S. History and Personal Finance project's files/instructions. In each new build request say: “Follow Classroom HTML Save/PDF Standard v1.2; use the frozen verified reference implementation, and perform the release gates.” If a new issue is discovered, update the standard once, then use the revised version in both projects.
 
 **No changes to a working live lesson's save layer without explicit authorization and a rollback plan.**
