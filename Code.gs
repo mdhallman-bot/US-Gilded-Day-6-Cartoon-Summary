@@ -1,11 +1,11 @@
 /** Unit 2 Day 6 — independent Apps Script endpoint, no shared secret.
- * 1. Enter SHEET_ID. 2. Deploy as Web App (Execute as me / Anyone).
+ * 1. Add SHEET_ID in Script Properties. 2. Deploy as Web App (Execute as me / Anyone).
  * 3. Paste deployment /exec URL into index.html CLOUD_URL.
  * Uses ONLY the DAY6_STATES_2026_11_04 tab; never touches other tabs.
  * WARNING: A publicly accessible endpoint WITHOUT a secret is not an authentication system.
  * Use pseudonymous student aliases only; no private or sensitive information.
  */
-const SHEET_ID = 'PASTE_EXISTING_SPREADSHEET_ID_HERE';
+const SHEET_ID = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
 const TAB = 'DAY6_STATES_2026_11_04';
 const HEADERS = ['alias','serverRevision','updatedAt','payload','checksum'];
 const MAX_PAYLOAD = 90000;
@@ -23,7 +23,7 @@ function alias_(v) {
   return a;
 }
 function tab_() {
-  if (SHEET_ID === 'PASTE_EXISTING_SPREADSHEET_ID_HERE') throw Error('Set SHEET_ID in Code.gs first.');
+  if (!SHEET_ID || !SHEET_ID.trim()) throw Error('Missing SHEET_ID in Script Properties.');
   const book=SpreadsheetApp.openById(SHEET_ID);
   let sheet=book.getSheetByName(TAB);
   if(!sheet) {sheet=book.insertSheet(TAB); sheet.appendRow(HEADERS); sheet.setFrozenRows(1);}
